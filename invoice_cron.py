@@ -5,6 +5,8 @@ from datetime import datetime
 
 import pdfkit
 
+from send_mail import send_email
+
 current_date = datetime.now()
 
 # calculate the previous month and year
@@ -109,3 +111,5 @@ with open("data.json", "w") as f:
 print("PDF generated")
 
 # TODO: send email from gmail
+
+send_email("Invocie", "Invoice", "peric.bojan87@gmail.com", output_path)
