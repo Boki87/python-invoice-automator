@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Invoice</title>
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      html {
+        margin: 0px;
+        padding: 0px;
+      }
+      body {
+        padding: 40px;
+        margin: 0px;
+      }
+
+      .header {
+        margin-bottom: 50px;
+        min-height: 50px;
+      }
+
+      .header__from {
+        font-size: 14px;
+        font-weight: bold;
+        max-width: 200px;
+        float: left;
+      }
+
+      .header__invoice_num {
+        float: right;
+        text-align: right;
+      }
+
+      .header__invoice_num--title {
+        font-size: 34px;
+        color: #555;
+        font-weight: bold;
+      }
+
+      .header__invoice_num--number {
+        font-size: 20px;
+        color: #444;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .bill_info {
+        margin-bottom: 50px;
+      }
+
+      .bill_to {
+        float: left;
+      }
+
+      .bill_to span {
+        font-size: 16px;
+        color: #777;
+      }
+      .bill_to p {
+        font-size: 16px;
+        font-weight: bold;
+        max-width: 200px;
+      }
+
+      .bill_dates {
+        float: right;
+      }
+
+      .bill_dates__row {
+        height: 30px;
+        line-height: 30px;
+      }
+      .bill_dates__row .label {
+        color: #888;
+        text-align: right;
+        min-width: 200px;
+        display: inline-block;
+      }
+      .bill_dates__row .date {
+        color: #333;
+        text-align: right;
+        min-width: 150px;
+        display: inline-block;
+        padding-right: 10px;
+      }
+
+      .bold {
+        font-weight: bold;
+        color: #000 !important;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 50px;
+      }
+
+      td {
+        padding: 5px 20px;
+        height: 40px;
+      }
+
+      .items {
+        width: 100%;
+      }
+      .rest {
+        min-width: 150px;
+        text-align: right;
+      }
+
+      .head {
+        background: #333;
+        color: #fff;
+      }
+      .head:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      .head:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header__from">{{ from }}</div>
+      <div class="header__invoice_num">
+        <span class="header__invoice_num--title"> INVOICE </span>
+        <br />
+        <span class="header__invoice_num--number"> #{{ invoice_number }} </span>
+      </div>
+      <div style="clear: both"></div>
+    </div>
+    <div class="bill_info">
+      <div class="bill_to">
+        <span> Bill To: </span>
+        <p>{{ bill_to }}</p>
+      </div>
+      <div class="bill_dates">
+        <div class="bill_dates__row">
+          <span class="label"> Date: </span>
+          <span class="date"> {{ date }} </span>
+        </div>
+        <div class="bill_dates__row">
+          <span class="label"> Due Date: </span>
+          <span class="date"> {{ due_date }} </span>
+        </div>
+        <div class="bill_dates__row">
+          <span class="label"> PO Number: </span>
+          <span class="date"> {{ po_number }} </span>
+        </div>
+        <div class="bill_dates__row" style="background: #dfdfdf">
+          <span class="label bold"> Balance Due: </span>
+          <span class="date bold"> {{ formated_total }} </span>
+        </div>
+      </div>
+      <div style="clear: both"></div>
+    </div>
+    <table>
+      <tbody>
+        <th>
+          <tr>
+            <td class="items head">Item</td>
+            <td class="rest head">Quantity</td>
+            <td class="rest head">Rate</td>
+            <td class="rest head">Amount</td>
+          </tr>
+        </th>
+        {{ items_html }}
+      </tbody>
+    </table>
+    <div class="total">
+      <div class="bill_dates">
+        <div class="bill_dates__row">
+          <span class="label"> Subtotal: </span>
+          <span class="date"> {{ formated_amount }} </span>
+        </div>
+        <div class="bill_dates__row">
+          <span class="label"> Tax ({{ tax }}%):</span>
+          <span class="date"> {{ formated_tax }} </span>
+        </div>
+        <div class="bill_dates__row">
+          <span class="label"> Total: </span>
+          <span class="date"> {{ formated_total }} </span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

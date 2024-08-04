@@ -1,0 +1,18 @@
+{
+    "prev_invoice_number": "11",
+    "name": "Bojan",
+    "email_to": "",
+    "email_from": "",
+    "from": "Bojan Peric PR Racunarsko Programiranje Misljenovac",
+    "bill_to": "Braq LLC, DBA Mozaiq 10125 Wiltshire Ln Truckee California 96161 United States",
+    "po_number": "87-4620204",
+    "currency": "US$",
+    "tax": "0",
+    "items": [
+        {
+            "item": "Programming service - {{month}}",
+            "quantity": "1",
+            "rate": "2100"
+        }
+    ]
+}
