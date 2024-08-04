@@ -87,7 +87,9 @@ data["invoice_number"] = data["prev_invoice_number"]
 # generate pdf
 html_content = render_tamplate(HTML_TEMPLATE, data)
 
-output_path = f"Invoice_{data['invoice_number']}_{current_year}_{data['name']}.pdf"
+output_path = (
+    f"./invoices/Invoice_{data['invoice_number']}_{current_year}_{data['name']}.pdf"
+)
 
 pdfkit.from_string(html_content, output_path)
 
