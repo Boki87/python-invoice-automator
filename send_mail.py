@@ -24,22 +24,23 @@ def send_email(subject, body, to_email, attachment_path):
     # Attach the body of the email
     msg.attach(MIMEText(body, "plain"))
 
-    # Open the file in binary mode
-    with open(attachment_path, "rb") as attachment:
-        # Create a MIMEBase object
-        mime_base = MIMEBase("application", "octet-stream")
-        mime_base.set_payload(attachment.read())
+    if attachment_path:
+        # Open the file in binary mode
+        with open(attachment_path, "rb") as attachment:
+            # Create a MIMEBase object
+            mime_base = MIMEBase("application", "octet-stream")
+            mime_base.set_payload(attachment.read())
 
-        # Encode the attachment in base64
-        encoders.encode_base64(mime_base)
+            # Encode the attachment in base64
+            encoders.encode_base64(mime_base)
 
-        # Add header for the attachment
-        mime_base.add_header(
-            "Content-Disposition", f"attachment; filename={attachment_path}"
-        )
+            # Add header for the attachment
+            mime_base.add_header(
+                "Content-Disposition", f"attachment; filename=invoice.pdf"
+            )
 
-        # Attach the file to the email
-        msg.attach(mime_base)
+            # Attach the file to the email
+            msg.attach(mime_base)
 
     try:
         # Connect to Gmail's SMTP server

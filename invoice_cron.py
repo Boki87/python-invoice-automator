@@ -110,6 +110,35 @@ with open("data.json", "w") as f:
 
 print("PDF generated")
 
-# TODO: send email from gmail
+# Send email with incoce attachment
+failFlag = False
+try:
+    send_email("Invocie", "Invoice", "peric.bojan87@gmail.com", output_path)
+except Exception as e:
+    failFlag = True
+    print(f"failed to send email: {str(e)}")
 
-send_email("Invocie", "Invoice", "peric.bojan87@gmail.com", output_path)
+with open("config.json", "r") as f:
+    config = json.load(f)
+
+
+if failFlag:
+    try:
+        send_email(
+            "Invoice CRON notification",
+            "Could not send email with invice",
+            config["email"],
+            False,
+        )
+    except Exception as e:
+        print(f"failed to send notification email")
+else:
+    try:
+        send_email(
+            "Invoice CRON notification",
+            "Email with invoce successfully sent",
+            config["email"],
+            False,
+        )
+    except Exception as e:
+        print(f"failed to send notification email")
